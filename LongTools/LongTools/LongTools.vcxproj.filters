@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\json">
+      <UniqueIdentifier>{d2bbbe8d-e395-448e-bbb2-ccca8ed47508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\curl">
+      <UniqueIdentifier>{68e466a7-b8d7-4475-9fb9-870825cef651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\zip">
+      <UniqueIdentifier>{f55180aa-441d-4470-88ab-662229768803}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\png">
+      <UniqueIdentifier>{5e19850f-9de2-45f9-9345-01428aa0928d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\jpeg">
+      <UniqueIdentifier>{137bf30f-6d7f-487d-96e6-2fe7fada1267}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="xxtea.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TraverseHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ioapi.c">
+      <Filter>源文件\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="zip.c">
+      <Filter>源文件\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="mztools.c">
+      <Filter>源文件\zip</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xxtea.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\allocators.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\document.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\document-wrapper.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\encodedstream.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\encodings.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\filereadstream.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\filewritestream.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\fwd.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\istreamwrapper.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\memorybuffer.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\memorystream.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\ostreamwrapper.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\pointer.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\prettywriter.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\reader.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\schema.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\stream.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\stringbuffer.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\writer.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\error\en.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\error\error.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\biginteger.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\diyfp.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\dtoa.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\ieee754.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\itoa.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\meta.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\pow10.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\regex.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\stack.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\strfunc.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\strtod.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\internal\swap.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\msinttypes\inttypes.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\msinttypes\stdint.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\curl.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\curlbuild.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\curlrules.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\curlver.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\easy.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\mprintf.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\multi.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\stdcheaders.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\typecheck-gcc.h">
+      <Filter>源文件\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="TraverseHandler.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ioapi.h">
+      <Filter>源文件\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip.h">
+      <Filter>源文件\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib.h">
+      <Filter>源文件\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="zconf.h">
+      <Filter>源文件\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="zip.h">
+      <Filter>源文件\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="mztools.h">
+      <Filter>源文件\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdline.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jpeg\jconfig.h">
+      <Filter>源文件\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jpeg\jmorecfg.h">
+      <Filter>源文件\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jpeg\jpeglib.h">
+      <Filter>源文件\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\png\png.h">
+      <Filter>源文件\png</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\png\pngconf.h">
+      <Filter>源文件\png</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\png\pnglibconf.h">
+      <Filter>源文件\png</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

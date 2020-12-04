@@ -1,0 +1,14 @@
+{
+	"dir":[
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\runtime-src\\cocos2dLib\\cocos2dLib"
+	],
+	"file":[
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_extension_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_ui_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\manual\\lua_cocos2dx_ui_manual.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\manual\\lua_cocos2dx_deprecated.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\manual\\lua_cocos2dx_extension_manual.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS\\cocos2d-x\\cocos\\scripting\\lua-bindings\\manual\\lua_cocos2dx_manual.cpp"
+	]
+}

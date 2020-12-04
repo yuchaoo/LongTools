@@ -1,0 +1,26 @@
+{
+	"dir":[
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\runtime-src\\cocos2dLib\\cocos2dLib"
+	],
+	"file":[
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\runtime-src\\cocos2dLib\\cocos2dLib\\Classes\\auto\\lua_client_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\runtime-src\\cocos2dLib\\cocos2dLib\\Classes\\auto\\lua_ui_extensions_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\runtime-src\\cocos2dLib\\cocos2dLib\\Classes\\auto\\lua_xui_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_3d_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_audioengine_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_cocosbuilder_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_cocosdenshion_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_controller_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_csloader_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_experimental_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_experimental_video_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_extension_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_navmesh_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_physics_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_physics3d_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_spine_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_studio_auto.cpp",
+		"E:\\workspace\\CQApp\\PublicCode_IOS_3.17\\cocos2d-x\\cocos\\scripting\\lua-bindings\\auto\\lua_cocos2dx_ui_auto.cpp"
+	]
+}
