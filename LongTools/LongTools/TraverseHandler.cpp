@@ -254,6 +254,7 @@ bool TraverseDir::isExistFile(const std::string& path) {
 	if (!file) {
 		return false;
 	}
+	fclose(file);
 	return true;
 }
 
@@ -1669,11 +1670,12 @@ void ResPathHandler::traverseEnd() {
 	TraverseDir::traverseEnd();
 }
 
-KeyWorldHandler::KeyWorldHandler(const std::string& input, const std::string& output, const std::string& mapFile, const std::string& outputFile)
+KeyWorldHandler::KeyWorldHandler(const std::string& input, const std::string& output, const std::string& mapFile, bool bReserveSuffix, bool addRedundant)
 :TraverseDir(input)
 ,m_output(output)
-,m_outputFile(outputFile)
-,m_mapFile(mapFile){
+, m_bReserveSuffix(bReserveSuffix)
+,m_mapFile(mapFile)
+, m_isAddRedundant(addRedundant){
 
 }
 
@@ -1756,13 +1758,15 @@ bool KeyWorldHandler::handleDirectory(const std::string& dir, const std::string&
 			return false;
 		}
 		m_dirMap[releate] = newdir;
-		addRedundantFiles(m_output + "/" + newdir);
 
-		int newdirCount = rand() % 3 + 1;
-		for (int i = 0; i < newdirCount; ++i) {
-			std::string subDir = m_output + "/" + newdir + "/" + m_dirWords[rand() % m_dirWords.size()];
-			if (!isExistDirectory(subDir) && CreateDirectory(subDir.c_str(), NULL)) {
-				addRedundantFiles(subDir);
+		if (m_isAddRedundant) {
+			addRedundantFiles(m_output + "/" + newdir);
+			int newdirCount = rand() % 3 + 1;
+			for (int i = 0; i < newdirCount; ++i) {
+				std::string subDir = m_output + "/" + newdir + "/" + m_dirWords[rand() % m_dirWords.size()];
+				if (!isExistDirectory(subDir) && CreateDirectory(subDir.c_str(), NULL)) {
+					addRedundantFiles(subDir);
+				}
 			}
 		}
 	}
@@ -1782,6 +1786,7 @@ bool KeyWorldHandler::handleFile(const std::string& file, const std::string& roo
 
 std::string KeyWorldHandler::createFileWithRandom(const std::string& root, const std::string& releate) {
 	std::string newpath;
+	std::string suffix = getSuffix(releate);
 	size_t pos = releate.rfind("/");
 	if (pos != -1) {
 		newpath = releate.substr(0, pos);
@@ -1795,19 +1800,30 @@ std::string KeyWorldHandler::createFileWithRandom(const std::string& root, const
 
 	std::string newname = createFileName();
 	std::string fullNewName = m_output + "/" + newpath + newname;
-	while (isExistDirectory(fullNewName) || isExistFile(fullNewName)) {
+	if (m_bReserveSuffix) {
+		fullNewName += "." + suffix;
+	}
+	while (isExistFile(fullNewName)) {
 		newname = createFileName();
 		fullNewName = m_output + "/" + newpath + newname;
+		if (m_bReserveSuffix) {
+			fullNewName += "." + suffix;
+		}
 	}
-	newpath += newname;
 	
 	size_t size = 0;
 	std::string file = root + "/" + releate;
 	auto dataptr = getFileData(file.c_str(), size);
+	if (!dataptr) {
+		return "";
+	}
 
-	file = m_output + "/" + newpath;
-	writeFileData(file, (unsigned char*) dataptr.get(), size);
-	return newpath;
+	writeFileData(fullNewName, (unsigned char*) dataptr.get(), size);
+	std::string key = newpath + newname;
+	if (m_bReserveSuffix) {
+		key += "." + suffix;
+	}
+	return key;
 }
 
 std::string KeyWorldHandler::createFileName() {
@@ -1861,7 +1877,7 @@ void KeyWorldHandler::addRedundantFiles(const std::string& path) {
 }
 
 void KeyWorldHandler::traverseEnd() {
-	std::string mapFile = m_output + "/" + m_outputFile.c_str();
+	std::string mapFile = m_output + "/" + "berlma";
 	FILE* file = fopen(mapFile.c_str(), "w");
 	if (!file) {
 		Log("open the file failed, %s", mapFile.c_str());

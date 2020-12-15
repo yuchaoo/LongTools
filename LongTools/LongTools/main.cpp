@@ -158,8 +158,8 @@ int main(int argc, char* args[]) {
 		subCmd.add<string>("input",'i',"the input dir",true,"");
 		subCmd.add<string>("output",'o',"the output dir",true,"");
 		subCmd.add<string>("mapcfg",'m',"the key words config",true,"");
-		subCmd.add<string>("outputfile", 'f', "the output map file", true, "");
-
+		subCmd.add<bool>("ressuffix", 'r', "keep suffix", false, false);
+		subCmd.add<bool>("addredundant", 'a', "add redundant file flag", false, true);
 		if (!subCmd.parse(argc - startIndex, args + startIndex)) {
 			printf("%s\n", subCmd.usage().c_str());
 			return 0;
@@ -168,9 +168,9 @@ int main(int argc, char* args[]) {
 		std::string input = subCmd.get<string>("input");
 		std::string output = subCmd.get<string>("output");
 		std::string mapcfg = subCmd.get<string>("mapcfg");
-		std::string outputFile = subCmd.get<string>("outputfile");
-
-		KeyWorldHandler handler(input,output,mapcfg,outputFile);
+		bool bReserveSuffix = subCmd.get<bool>("ressuffix");
+		bool addRed = subCmd.get<bool>("addredundant");
+		KeyWorldHandler handler(input,output,mapcfg, bReserveSuffix,addRed);
 		handler.traverse();
 	}
 	else if (type == "modifymd5") {

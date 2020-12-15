@@ -236,7 +236,7 @@ struct WordSlice {
 
 class KeyWorldHandler : public TraverseDir {
 public:
-	KeyWorldHandler(const std::string& input, const std::string& output, const std::string& mapFile, const std::string& outputFile);
+	KeyWorldHandler(const std::string& input, const std::string& output, const std::string& mapFile, bool bReserveSuffix, bool addRedundant);
 	~KeyWorldHandler();
 	virtual bool traverse();
 	virtual bool handleDirectory(const std::string& dir, const std::string& root, const std::string& releate);
@@ -253,6 +253,8 @@ private:
 	std::vector<std::string> m_fileWords;
 	std::map<std::string, std::string> m_fileMap;
 	std::unordered_map < std::string, std::string> m_dirMap;
+	bool m_isAddRedundant;
+	bool m_bReserveSuffix;
 };
 
 class ModifyMd5Handler : public TraverseDir {
