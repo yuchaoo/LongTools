@@ -5,7 +5,7 @@
 #include "xxtea.h"
 #include "TraverseHandler.h"
 #include "cmdline.h"
-
+#include "ExcelParser.h"
 using namespace std;
 
 int parseCommondline(int argc, char** args, std::unordered_map<string,string>& cmd) {
@@ -39,7 +39,7 @@ int main(int argc, char* args[]) {
 	size_t startIndex = 0;
 
 	cmdline::parser mainCmd;
-	mainCmd.add<string>("type", '\0', "cmd type:encrypt,createpatch,subpkg,obb,zip,pathmap,repword,modifymd5,repclass,addcodes", true, "");
+	mainCmd.add<string>("type", '\0', "cmd type:encrypt,createpatch,subpkg,obb,zip,pathmap,repword,modifymd5,repclass,addcodes,xltolua", true, "");
 	if (!mainCmd.parse(min(3,argc), args + startIndex)) {
 		printf("%s\n", mainCmd.usage().c_str());
 		return 0;
@@ -217,6 +217,24 @@ int main(int argc, char* args[]) {
 
 		AddGarbageCode addGarHandler(cfgfile, wordcfg);
 		addGarHandler.traverse();
+	}
+	else if (type == "xltolua") {
+		cmdline::parser subCmd;
+		subCmd.add<string>("input", 'i', "the excel dir", true, "");
+		subCmd.add<string>("clientoutput", 'c', "the client output dir", true, "");
+		subCmd.add<string>("serveroutput",'s',"the server output dir",true, "");
+		subCmd.add<string>("exportflag", 'f', "the export flag 'client' 'server' 'all'",true,"");
+
+		if (!subCmd.parse(argc - startIndex, args + startIndex)) {
+			printf("%s\n", subCmd.usage().c_str());
+			return 0;
+		}
+		std::string input = subCmd.get<string>("input");
+		std::string clientoutput = subCmd.get<string>("clientoutput");
+		std::string serveroutput = subCmd.get<string>("serveroutput");
+		std::string exportflag = subCmd.get<string>("exportflag");
+		ExcelParser parser(input, clientoutput, serveroutput, exportflag);
+		parser.traverse();
 	}
 	else {
 		printf("%s\n", mainCmd.usage().c_str());

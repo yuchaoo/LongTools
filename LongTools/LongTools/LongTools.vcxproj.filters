@@ -51,6 +51,9 @@
     <ClCompile Include="mztools.c">
       <Filter>源文件\zip</Filter>
     </ClCompile>
+    <ClCompile Include="ExcelParser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xxtea.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="lib\png\pnglibconf.h">
       <Filter>源文件\png</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcelParser.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

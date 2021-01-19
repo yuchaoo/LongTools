@@ -75,11 +75,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RAPIDJSON_HAS_STDSTRING;NOCRYPT;ZLIB_WINAPI;RETRO_IMPORT_SYMBOLS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib/jpeg;$(ProjectDir)lib/png;$(ProjectDir)lib/libretro;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib/jpeg;$(ProjectDir)lib/png;$(ProjectDir)lib/libretro;$(ProjectDir)libxl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl.lib;zlibstat.lib;fceumm_libretro.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl.lib;zlibstat.lib;libxl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ExcelParser.cpp" />
     <ClCompile Include="ioapi.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md5.c" />
@@ -144,6 +145,7 @@
     <ClInclude Include="curl\multi.h" />
     <ClInclude Include="curl\stdcheaders.h" />
     <ClInclude Include="curl\typecheck-gcc.h" />
+    <ClInclude Include="ExcelParser.h" />
     <ClInclude Include="ioapi.h" />
     <ClInclude Include="json\allocators.h" />
     <ClInclude Include="json\document-wrapper.h" />

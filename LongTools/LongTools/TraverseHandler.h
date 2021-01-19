@@ -11,6 +11,7 @@
 #include "zip.h"
 
 using namespace std;
+void Log(const char* format, ...);
 
 typedef std::function<void(const std::string&)> TraverseCallback;
 struct PatchInfo {
