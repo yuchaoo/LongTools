@@ -171,7 +171,7 @@ bool ExcelSheet::init() {
 
 	int row = _lastRow - _firstRow ;
 	int col = _lastCol - _firstCol ;
-	//½âÎöµ¼³ö±êÖ¾
+	//è§£æå¯¼å‡ºæ ‡å¿—
 
 	int curRow = _firstRow;
 	ExcelCell flagCell1(_sheet, curRow, 0);
@@ -191,7 +191,7 @@ bool ExcelSheet::init() {
 	libxl::Color flagColor3 = flagCell3.getColor();
 	setExportColor(flagColor3, flagStr3);
 
-	//½âÎöµ¼³öÍ·
+	//è§£æå¯¼å‡ºå¤´
 	curRow += 2;
 	_fieldTypes.resize(col);
 	_fieldHeader.resize(col);
@@ -206,14 +206,14 @@ bool ExcelSheet::init() {
 		_serverExportFlag[i] = (color == _serverColor || color == _allColor);
 	}
 
-	//½âÎöÀàĞÍ
+	//è§£æç±»å‹
 	curRow++;
 	for (size_t i = 0; i < col; ++i) {
 		ExcelCell cell(_sheet, curRow, i);
 		_fieldTypes[i] = cell.readValue()->getString();
 	}
 
-	//½âÎöÊı¾İ
+	//è§£ææ•°æ®
 	curRow++;
 	_dataList.resize(_lastRow - curRow);
 	for (size_t i = curRow; i < _lastRow; ++i) {
@@ -453,7 +453,18 @@ void LuaWriter::write(const std::vector<std::vector<ExcelCell*>>& dataList,
 	ss << _tableName << " = {\n";
 	for (size_t i = 0; i < dataList.size(); ++i) {
 		std::string s = writeRow(dataList[i], headerList, typeList, exportList);
-		ss << "\t" << s;
+		
+		auto value = dataList[i][0]->getValue();
+		if (typeList[0] == TYPE_INT) {
+			ss << "[" << value->print() << "]=" << s;
+		}
+		else if (typeList[0] == TYPE_STR) {
+			ss << "[\"" << value->print() << "\"]=" << s;
+		}
+		else {
+			ss << "\t" << s;
+		}
+
 		if (i < dataList.size() - 1) {
 			ss << ",\n";
 		}
