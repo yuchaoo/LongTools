@@ -95,6 +95,8 @@ void ExcelParser::exportSheet(ExcelSheet* sheet) {
 		std::string outfile = _serverOutput + "/" + name + ".lua";
 		LuaWriter serverWriter(name, outfile);
 		serverWriter.write(sheet->getDataList(), sheet->getHeaderList(), sheet->getTypeList(), sheet->getServerExportList());
+		CppParser parser(name, _serverOutput + "/" + name);
+		parser.write(sheet->getHeaderList(), sheet->getTypeList(), sheet->getServerExportList());
 	}
 }
 
@@ -454,7 +456,7 @@ void LuaWriter::write(const std::vector<std::vector<ExcelCell*>>& dataList,
 	for (size_t i = 0; i < dataList.size(); ++i) {
 		std::string s = writeRow(dataList[i], headerList, typeList, exportList);
 		
-		auto value = dataList[i][0]->getValue();
+		/*auto value = dataList[i][0]->getValue();
 		if (typeList[0] == TYPE_INT) {
 			ss << "[" << value->print() << "]=" << s;
 		}
@@ -463,8 +465,9 @@ void LuaWriter::write(const std::vector<std::vector<ExcelCell*>>& dataList,
 		}
 		else {
 			ss << "\t" << s;
-		}
+		}*/
 
+		ss << "\t" << s;
 		if (i < dataList.size() - 1) {
 			ss << ",\n";
 		}
@@ -616,4 +619,118 @@ std::string LuaWriter::writeField(const std::string& field, CellValue* value, co
 		}
 	}
 	return ss.str();
+}
+
+
+CppParser::CppParser(const std::string& tableName, const std::string& outfile)
+:_tableName(tableName)
+,_outfile(outfile){
+
+}
+
+CppParser::~CppParser() {
+
+}
+
+const char* getTypeStr(const std::string& type) {
+	if (type == TYPE_INT) {
+		return "int";
+	}
+	else if (type == TYPE_BOOL) {
+		return "bool";
+	}
+	else if (type == TYPE_FLOAT) {
+		return "float";
+	}
+	else if (type == TYPE_STR) {
+		return "std::string";
+	}
+	else if (type == TYPE_TEXT) {
+		return "std::unordered_map<MapKV,MapKV>";
+	}
+	return "";
+}
+
+void replace(std::string& str, const std::string& m, const std::string& r) {
+	size_t pos = str.find(m);
+	while (pos != -1) {
+		str.replace(pos, m.size(), r);
+		pos = str.find(m);
+	}
+}
+
+void CppParser::write(const std::vector<std::string>& headerList,
+	const std::vector<std::string>& typeList,
+	const std::vector<bool>& exportList) {
+	/*.h*/
+	std::stringstream hss, cppss;
+	hss << IncludeH;
+
+	std::string numberdef;
+	for (size_t i = 0; i < headerList.size(); ++i) {
+		if (!exportList[i]) {
+			continue;
+		}
+		std::string def = ItemNumberDef;
+		std::string typestr = getTypeStr(typeList[i]);
+		replace(def, "#type", typestr);
+		replace(def, "#name", headerList[i]);
+		numberdef += def;
+	}
+
+	std::string itemdef = ItemDef;
+	replace(itemdef, "#configname", _tableName);
+	replace(itemdef, "#content", numberdef);
+
+	hss << itemdef;
+
+	std::string configdef = ConfigDef;
+	replace(configdef, "#configname", _tableName);
+	const char* keytype = getTypeStr(typeList[0]);
+	replace(configdef, "#type", keytype);
+
+	hss << configdef;
+
+	/*cpp*/
+	std::string cppinclude = IncludeCpp;
+	replace(cppinclude, "#configname", _tableName);
+	cppss << cppinclude;
+
+	std::string unpackstr;
+	for (size_t i = 0; i < headerList.size(); ++i) {
+		if (!exportList[i]) {
+			continue;
+		}
+		std::string str = ConfigUnpack;
+		replace(str, "#fieldname", headerList[i]);
+		unpackstr += str;
+	}
+
+	std::string cmp = ConfigComp;
+	replace(cmp, "#configname", _tableName);
+	replace(cmp, "#type", keytype);
+	replace(cmp, "#content", unpackstr);
+
+	cppss << cmp;
+
+	std::string hfile = _outfile + ".h";
+	FILE* file = fopen(hfile.c_str(), "w+");
+	if (!file) {
+		Log("open file failed, s:%s", hfile.c_str());
+		return;
+	}
+
+	std::string hssstr = hss.str();
+	fwrite(hssstr.c_str(), 1, hssstr.size(), file);
+	fclose(file);
+
+	std::string cppfile = _outfile + ".cpp";
+	file = fopen(cppfile.c_str(), "w+");
+	if (!file) {
+		Log("open file failed, s:%s", cppfile.c_str());
+		return;
+	}
+	std::string cppstr = cppss.str();
+	fwrite(cppstr.c_str(), 1, cppstr.size(), file);
+	fclose(file);
 }

@@ -142,3 +142,86 @@ private:
 	std::string _outfile;
 	std::string _tableName;
 };
+
+
+static const char* IncludeH = R"(
+#include <string>
+#include <unordered_map>
+#include "luaext/GameLua.h"
+#include "luaext/LuaWrapper.h"
+#include "config.h"
+
+extern "C" {
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
+)";
+
+static const char* IncludeCpp = R"(
+#include "#configname.h"
+)";
+
+static const char* ItemNumberDef =R"(
+	#type #name;
+)";
+
+static const char* ItemDef = R"(
+struct #confignameItem{
+#content
+};
+)";
+
+static const char* ConfigDef = R"(
+class #configname {
+public:
+	static #confignameItem* Get(#type index);
+	static void Clear();
+private:
+	static std::unordered_map<#type, #confignameItem*> _items;
+};
+)";
+
+static const char* ConfigUnpack = R"(
+	Lua_GetField(L, -1, "#fieldname");
+	Lua_Unpack(L, item->#fieldname);
+)";
+
+static const char* ConfigComp = R"(
+std::unordered_map<#type, #confignameItem*> #configname::_items = {};
+#confignameItem* #configname::Get(#type index) {
+	auto iter = _items.find(index);
+	if (iter != _items.end()) {
+		return iter->second;
+	}
+	lua_State* L = GameLua::GetInstance()->GetLuaState();
+	int ret = Lua_GlobalTop(L, "#configname", index);
+	if (ret != 2) {
+		lua_pop(L, ret);
+		return NULL;
+	}
+	#confignameItem* item = new #confignameItem;
+	#content
+	lua_pop(L, ret);
+	_items.insert(std::make_pair(index, item));
+	return item;
+}
+void #configname::Clear() {
+	for (auto iter = _items.begin(); iter != _items.end(); ++iter) {
+		delete iter->second;
+	}
+	_items.clear();
+}
+)";
+
+class CppParser {
+public:
+	CppParser(const std::string& tableName, const std::string& outfile);
+	~CppParser();
+	void write(const std::vector<std::string>& headerList,
+		const std::vector<std::string>& typeList,
+		const std::vector<bool>& exportList);
+private:
+	std::string _outfile;
+	std::string _tableName;
+};
