@@ -81,7 +81,9 @@ bool ExcelParser::handleFile(const std::string& file, const std::string& root, c
 void ExcelParser::exportSheet(ExcelSheet* sheet) {
 	const std::string& name = sheet->getName();
 	std::string lowerName = name;
-	std::transform(name.begin(), name.end(), lowerName.begin(),std::tolower);
+	std::transform(name.begin(), name.end(), lowerName.begin(), [](unsigned char c)->unsigned char {
+		return std::tolower(c);
+	} );
 	if (lowerName.find("config") == -1) {
 		Log("skip the sheet:%s",name.c_str());
 		return;

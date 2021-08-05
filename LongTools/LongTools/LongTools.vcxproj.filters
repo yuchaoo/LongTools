@@ -54,6 +54,12 @@
     <ClCompile Include="ExcelParser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ExtractString.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xxtea.h">
@@ -240,6 +246,12 @@
       <Filter>源文件\png</Filter>
     </ClInclude>
     <ClInclude Include="ExcelParser.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractString.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2654,7 +2654,7 @@ bool AddGarbageCode::checkPreLine(const std::string& str) {
 }
 
 void AddGarbageCode::addGarbageCodeToCPP(std::string& data) {
-	std::regex reg("\\{([^{}\]*)\\}");
+	std::regex reg("\\{(\[^{}\]*)\\}");
 	std::function<std::string(std::smatch const& match, size_t pos)> callback = [=](std::smatch const& match, size_t pos)->std::string {
 		std::string content = match[1].str();
 		if (content.find("\\") != -1) {
