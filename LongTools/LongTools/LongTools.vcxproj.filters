@@ -28,6 +28,9 @@
     <Filter Include="源文件\jpeg">
       <UniqueIdentifier>{137bf30f-6d7f-487d-96e6-2fe7fada1267}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\tga">
+      <UniqueIdentifier>{8a9f40b0-1506-4a40-9ad6-b80e67d5c37c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +61,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureTansition.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -253,6 +259,15 @@
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureTansition.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tga\tga.h">
+      <Filter>源文件\tga</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tga\tgaconfig.h">
+      <Filter>源文件\tga</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

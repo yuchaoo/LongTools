@@ -1,56 +1,7 @@
 #include <codecvt>
 #include <sstream> 
 #include "ExcelParser.h"
-
-std::string wstr2str(const std::wstring& str) {
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	return converter.to_bytes(str);
-}
-
-std::wstring str2wstr(const std::string& str) {
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	return converter.from_bytes(str);
-}
-
-string GbkToUtf8(const std::string& strGBK)
-{
-   string strOutUTF8 = "";
-   if (strGBK.empty()) {
-	   return "";
-   }
-
-   WCHAR * str1;
-   int n = MultiByteToWideChar(CP_ACP, 0, strGBK.c_str(), -1, NULL, 0);
-   str1 = new WCHAR[n];
-   MultiByteToWideChar(CP_ACP, 0, strGBK.c_str(), -1, str1, n);
-   n = WideCharToMultiByte(CP_UTF8, 0, str1, -1, NULL, 0, NULL, NULL);
-   char* str2 = new char[n];
-   WideCharToMultiByte(CP_UTF8, 0, str1, -1, str2, n, NULL, NULL);
-   strOutUTF8 = str2;
-   delete[]str1;
-   delete[]str2;
-   return strOutUTF8;
-}
-
-string Utf8ToGbk(const std::string& strUTF8)
-{
-    string strOutGBK = "";
-	if (strUTF8.empty()) {
-		return "";
-	}
-
-    WCHAR * str1;
-    int n = MultiByteToWideChar(CP_UTF8, 0, strUTF8.c_str(), -1, NULL, 0);
-    str1 = new WCHAR[n];
-    MultiByteToWideChar(CP_UTF8, 0, strUTF8.c_str(), -1, str1, n);
-    n = WideCharToMultiByte(CP_ACP, 0, str1, -1, NULL, 0, NULL, NULL);
-    char* str2 = new char[n];
-    WideCharToMultiByte(CP_ACP, 0, str1, -1, str2, n, NULL, NULL);
-    strOutGBK = str2;
-    delete[]str1;
-    delete[]str2;
-    return strOutGBK;
-}
+#include "utils.h"
 
 ExcelParser::ExcelParser(const std::string& input, const std::string& clientOutput, const std::string& serverOutput, const std::string& exportFlag)
 :TraverseDir(input)

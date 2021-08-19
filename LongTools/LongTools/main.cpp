@@ -6,6 +6,8 @@
 #include "TraverseHandler.h"
 #include "cmdline.h"
 #include "ExcelParser.h"
+#include "ExtractString.h"
+#include "TextureTansition.h"
 using namespace std;
 
 int parseCommondline(int argc, char** args, std::unordered_map<string,string>& cmd) {
@@ -39,7 +41,7 @@ int main(int argc, char* args[]) {
 	size_t startIndex = 0;
 
 	cmdline::parser mainCmd;
-	mainCmd.add<string>("type", '\0', "cmd type:encrypt,createpatch,subpkg,obb,zip,pathmap,repword,modifymd5,repclass,addcodes,xltolua", true, "");
+	mainCmd.add<string>("type", '\0', "cmd type:encrypt,createpatch,subpkg,obb,zip,pathmap,repword,modifymd5,repclass,addcodes,xltolua,extstr", true, "");
 	if (!mainCmd.parse(min(3,argc), args + startIndex)) {
 		printf("%s\n", mainCmd.usage().c_str());
 		return 0;
@@ -235,6 +237,41 @@ int main(int argc, char* args[]) {
 		std::string exportflag = subCmd.get<string>("exportflag");
 		ExcelParser parser(input, clientoutput, serveroutput, exportflag);
 		parser.traverse();
+	}
+	else if (type == "extstr") {
+		cmdline::parser subCmd;
+		subCmd.add<string>("indir",'d',"the input dir",true,"");
+		subCmd.add<string>("infile",'i',"the inout file",false,"");
+		subCmd.add<string>("filter",'f',"the filter files",true,"");
+		subCmd.add<int>("lang", 'l', "the language of translated(1:Vietnamese,2:Japanese,3:Korea)", true, 1);
+		if (!subCmd.parse(argc - startIndex, args + startIndex)) {
+			printf("%s\n", subCmd.usage().c_str());
+			return 0;
+		}
+		std::string indir = subCmd.get<string>("indir");
+		std::string filter = subCmd.get<string>("filter");
+		std::string infile = subCmd.get<string>("infile");
+		int type = subCmd.get<int>("lang");
+
+		ExtractString es(indir, infile, filter, type);
+		es.traverse();
+	}
+	else if (type == "textrans") {
+		cmdline::parser subCmd;
+		subCmd.add<string>("input", 'i', "the input dir", true, "");
+		subCmd.add<string>("output", 'o', "the output dir", true, "");
+		subCmd.add<string>("totype", 't', "target file type", false, "");
+		subCmd.add<string>("filter", 'f', "the filter file 'png@jpg'", false, "");
+		if (!subCmd.parse(argc - startIndex, args + startIndex)) {
+			printf("%s\n", subCmd.usage().c_str());
+			return 0;
+		}
+		std::string input = subCmd.get<string>("input");
+		std::string output = subCmd.get<string>("output");
+		std::string totype = subCmd.get<string>("totype");
+		std::string filter = subCmd.get<string>("filter");
+		TextureTansition tt(input, output, totype, filter);
+		tt.traverse();
 	}
 	else {
 		printf("%s\n", mainCmd.usage().c_str());

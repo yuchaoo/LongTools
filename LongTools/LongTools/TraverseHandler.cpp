@@ -9,6 +9,7 @@
 #include <thread>
 #include "curl/curl.h"
 #include <sstream>
+#include "utils.h"
 
 #pragma comment(lib,"ws2_32.lib")
 
@@ -18,7 +19,7 @@ unsigned char sign[len] = { 0x33, 0xed ,0xf6 ,0x11 ,0xde ,0x6e };
 unsigned char key[len] = { 0x16, 0x3e ,0x72 ,0xf6 ,0xa3 ,0xd7 };
 
 void Log(const char* format,...) {
-	static char text[256];
+	static char text[10000];
 	va_list args;
 	va_start(args, format);
 	vsnprintf(text, sizeof(text), format, args);
@@ -74,37 +75,6 @@ int randomNumber(int minNum, int maxNum) {
 	}
 	int l = maxNum - minNum + 1;
 	return minNum + (rand() * (rand() % 9999)) % l;
-}
-
-void trim(string& str)
-{
-	if (str.empty()) {
-		return;
-	}
-	int i = 0, j = 0;
-	while (i < str.size()) {
-		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r')) {
-			break;
-		}
-		++i;
-	}
-	if (i > 0) {
-		for (; i < str.size(); ++i) {
-			str[j++] = str[i];
-		}
-		str.resize(j);
-	}
-	
-	i = str.size() - 1;
-	while(i >= 0) {
-		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r')) {
-			break;
-		}
-		--i;
-	}
-	if (i < str.size() - 1) {
-		str.resize(i + 1);
-	}
 }
 
 std::string regex_replace(const std::string& input, const std::regex& regex, std::function<std::string(std::smatch const& match, size_t pos)> format) {
@@ -2654,7 +2624,7 @@ bool AddGarbageCode::checkPreLine(const std::string& str) {
 }
 
 void AddGarbageCode::addGarbageCodeToCPP(std::string& data) {
-	std::regex reg("\\{(\[^{}\]*)\\}");
+	std::regex reg("\\{(\\[^{}\\]*)\\}");
 	std::function<std::string(std::smatch const& match, size_t pos)> callback = [=](std::smatch const& match, size_t pos)->std::string {
 		std::string content = match[1].str();
 		if (content.find("\\") != -1) {
